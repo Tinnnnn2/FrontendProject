@@ -28,6 +28,7 @@
         res.render("Reigister", {users : response.data});
     });
 
+
     app.listen(5500, () => {
         console.log('Sever started on post 5500');
     });
