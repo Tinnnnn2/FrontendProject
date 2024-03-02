@@ -18,15 +18,43 @@
             res.render("shop", {Products : response.data});
     });
 
+    app.get("/adidas",async(req, res) => {
+        const response = await axios.get(base_url + '/adidas');
+        res.render("adidas", {adidas : response.data});
+    });
+
+    app.get("/nike",async(req, res) => {
+        const response = await axios.get(base_url + '/nikes');
+        res.render("nike", {nikes : response.data});
+    });
+
+    app.get("/converse",async(req, res) => {
+        const response = await axios.get(base_url + '/converses');
+        res.render("converse", {converses : response.data});
+    });
+
     app.get("/login",async(req, res) => {
         const response = await axios.get(base_url + '/users');
         res.render("login", {users : response.data});
     });
 
     app.get("/Register",async(req, res) => {
-        const response = await axios.get(base_url + '/users');
-        res.render("Reigister", {users : response.data});
+        res.render("Register");
     });
+
+    app.post("/Register",async(req, res) => {
+        const data = {
+            username:req.body.username, 
+            email:req.body.email,              
+            password:req.body.password,     
+            phone:req.body.phone,         
+            userAdress:req.body.userAdress 
+        }
+        await axios.post(base_url + '/users',data)
+        return res.redirect("/");   
+    });
+
+
 
 
     app.listen(5500, () => {

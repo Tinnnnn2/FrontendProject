@@ -39,15 +39,15 @@
 
     <div class="container mt-4">
         <div class="row">
-            <% for (let i = 0; i < Products.length; i++) { %>
+            <% for (let i = 0; i < adidas.length; i++) { %>
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                        <img class="card-img-top" src="<%= Products[i].img_product %>" alt="Product Image">
+                        <img class="card-img-top" src="<%= adidas[i].imageURL %>" alt="Product Image">
                         <div class="card-body">
-                            <h5 class="card-title"><%= Products[i].Name_product %></h5>
-                            <p class="card-text">Price: <%= Products[i].price %></p>
-                            <p class="card-text">Size: <%= Products[i].size %></p>
-                            <a href="/products/<%= Products[i].Productid %>" class="btn btn-primary">View Details</a>
+                            <h5 class="card-title"><%= adidas[i].adidas_product %></h5>
+                            <p class="card-text">Price: <%= adidas[i].price %></p>
+                            <p class="card-text">Size: <%= adidas[i].size %></p>
+                            <a href="/adidas/<%= adidas[i].adidasid %>" class="btn btn-primary">View Details</a>
                         </div>
                     </div>
                 </div>
