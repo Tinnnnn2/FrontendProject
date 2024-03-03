@@ -8,13 +8,15 @@ body {
 }
 
 .navbar-brand img {
-    width: 100px;
+    width: 80px;
     height: auto;
+    margin-left: 20px;
 }
 
 .navbar-brand:hover {
     background-color: transparent !important;
 }
 
-
-
+.navbar-nav a:hover {
+    text-decoration: underline;
+}
