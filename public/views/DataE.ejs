@@ -4,28 +4,27 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sneaker Shop</title>
     <link rel="stylesheet" href="../css/style.css">
-    <title>sneaker shop</title>
 </head>
 <body>
-
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="/"><img src="../img/logo.png" class="logo" alt="Logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/nike">Nike</a>
+                        <a class="nav-link" href="/nike/<%= type[0].Typeid %>">Nike</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/adidas">Adidas</a>
+                        <a class="nav-link" href="/adidas/<%= type[1].Typeid %>">Adidas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/converse">Converse</a>
+                        <a class="nav-link" href="/converse/<%= type[2].Typeid %>">Converse</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav me-5">
@@ -36,22 +35,22 @@
             </div>
         </nav>
     </header>
-
-    <div class="container mt-5">
+    <div class="container mt-4">
         <div class="row">
             <div class="col-md-6">
-                <img src="https://placehold.co/500x500" alt="" class="img-fluid">
+                <img src="../img/products/<%= product.img_product %>" class="img-fluid" alt="Product Image">
             </div>
-            <div class="col-md-6 product-info">
-                <h1><%= products.Name_product %></h1>
-                <p>Size: <%= products.size  %></p>
-                <p>Price: <%= products.price %></p>
-                <button class="btn btn-primary">Buy Now</button>
+            <div class="col-md-6">
+                <h1 class="display-4"><%= product.Name_product %></h1>
+                <h2 class="h4">Size: <%= product.size %></h2>
+                <h2 class="h4">Price: <%= product.price %></h2>
             </div>
         </div>
     </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
-</html> 
+</html>

@@ -4,6 +4,7 @@ const path = require("path");
 const app = express();
 var bodyParser = require('body-parser');
 const multer  = require('multer');
+const { render } = require('ejs');
 
 const base_url = "http://localhost:3000";
 
@@ -29,6 +30,8 @@ app.use(express.static(__dirname + '/public'));
 app.get("/",async(req, res) => {
     const response = await axios.get(base_url + "/Products");
     const response2 = await axios.get(base_url + "/Types");
+    console.log(response.data)
+    console.log(response2.data)
     res.render("shop", {product: response.data, type: response2.data});
 });
 
@@ -45,7 +48,6 @@ app.get("/nike/:id",async (req, res) => {
             dt.push(data);
         }   
     }
-
     const response2 = await axios.get(base_url + "/Types");
     res.render("nike", {dt: dt, type: response2.data});
 });
@@ -62,7 +64,6 @@ app.get("/adidas/:id",async (req, res) => {
             ad.push(data);
         }   
     }
-
     const response2 = await axios.get(base_url + "/Types");
     res.render("adidas", {ad: ad, type: response2.data});
 });
@@ -79,11 +80,21 @@ app.get("/converse/:id",async (req, res) => {
             cv.push(data);
         }   
     }
-
     const response2 = await axios.get(base_url + "/Types");
     res.render("converse", {cv: cv, type: response2.data});
 });
 
+app.get("/DataE/:id",async (req,res) =>{
+    const response = await axios.get(base_url + "/Products/" + req.params.id);
+    const response2 = await axios.get(base_url + "/Types");
+    try{
+        res.render("DataE",{product: response.data, type: response2.data})
+    }catch{
+        console.error(err);
+        res.status(500).send('Error list ')
+        
+    }
+});
 
 
 
@@ -92,8 +103,37 @@ app.get("/login",async(req, res) => {
     res.render("login", {users : response.data});
 });
 
+app.post("/login",async(req, res) => {
+    try{
+    const data = {
+        name:req.body.username,
+        password:req.body.password
+    }
+    const response = await axios.post(base_url + '/login',data)
+    if(response.data.message == "user not found"){
+        const wrong = {
+            message:"wrong"
+        }
+        res.redirect("/login")
+    }
+    else if(response.data.message == "wrong password"){
+        const wrong = {
+            message:"wrong"
+        }
+        res.redirect("/login")
+    }
+    else{
+        res.redirect("/");
+    }
+}catch(err){
+    console.log(err);
+    res.status(500).send("error");
+}
+});
+
+
 app.get("/Register",async(req, res) => {
-    res.render("Register");
+    res.render("Register"); 
 });
 
 app.post("/Register",async(req, res) => {
