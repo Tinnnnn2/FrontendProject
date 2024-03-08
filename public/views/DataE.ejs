@@ -26,10 +26,20 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/converse/<%= type[2].Typeid %>">Converse</a>
                     </li>
+                    <% if(usedata.level == "admin") { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/addproduct">addproduct</a>
+                        </li>
+                        <% } %>
                 </ul>
                 <ul class="navbar-nav me-5">
                     <li class="nav-item ms-5">
+                        <% if (usedata.username) {%>
+                            <%= usedata.username  %>
+                            <a href="/logout">logout</a>
+                        <% } else {%>
                         <a class="nav-link" href="/login">Login/Register</a>
+                        <% } %>
                     </li>
                 </ul>
             </div>
@@ -44,6 +54,10 @@
                 <h1 class="display-4"><%= product.Name_product %></h1>
                 <h2 class="h4">Size: <%= product.size %></h2>
                 <h2 class="h4">Price: <%= product.price %></h2>
+
+                <a href="/bucket?Productid=<%= product.Productid %>" class="btn btn-success mt-3">Confirm Purchase</a>
+
+            </div>
             </div>
         </div>
     </div>

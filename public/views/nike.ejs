@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Nike</a>
+                    <a class="nav-link" href="/nike/<%= type[0].Typeid %>">Nike</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/adidas/<%= type[1].Typeid %>">Adidas</a>
@@ -27,10 +27,20 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/converse/<%= type[2].Typeid %>">Converse</a>
                 </li>
+                <% if(usedata.level == "admin") { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/addproduct">addproduct</a>
+                    </li>
+                    <% } %>
             </ul>
             <ul class="navbar-nav me-5">
                 <li class="nav-item ms-5">
+                    <% if (usedata.username) {%>
+                        <%= usedata.username  %>
+                        <a href="/logout">logout</a>
+                    <% } else {%>
                     <a class="nav-link" href="/login">Login/Register</a>
+                    <% } %>
                 </li>
             </ul>
         </div>
@@ -39,26 +49,21 @@
 
 <div class="container mt-4">
     <h2>Sneaker Collection</h2>
-    <% for (let i = 0; i < dt.length; i++) { %>
-    <div id="sneakerCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="row">
-                        <div class="col-md-4">
-                            <div class="card">
-                                <img src="../img/products/<%= dt[i].img_product %>" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                        <h5 class="card-title"> <%= dt[i].Name_product %> </h5>
-                                        <a href="#" class="btn btn-primary">View Details</a>
-
-                                </div>
-                            </div>
-                        </div>
+    <div class="row">
+        <% for (let i = 0; i < dt.length; i++) { %>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="../img/products/<%= dt[i].img_product %>" class="card-img-top" alt="Product Image">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= dt[i].Name_product %></h5>
+                        <a href="/DataE/<%= dt[i].Productid %>" class="btn btn-primary">View Details</a>
                     </div>
                 </div>
             </div>
-        </div>
-    <% } %>
+        <% } %>
+    </div>
+</div>
+
 
     
 
