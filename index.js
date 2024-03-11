@@ -118,19 +118,47 @@ app.get("/converse/:id",async (req, res) => {
     res.render("converse", {cv: cv, type: response2.data, usedata:req.session.logindata});
 });
 
+//---------------------------------------------------------------------------
+
+
+
+
+
+
 app.get("/DataE/:id",async (req,res) =>{
     const response = await axios.get(base_url + "/Products/" + req.params.id);
+    const response1 = await axios.get(base_url + "/users/" + req.params.id);
     const response2 = await axios.get(base_url + "/Types");
     try{
-        res.render("DataE",{product: response.data, type: response2.data, usedata:req.session.logindata})
+        console.log(req.session.logindata)
+        res.render("DataE",{product: response.data, user:response1.data,  type: response2.data, usedata:req.session.logindata})
     }catch{
         console.error(err);
         res.status(500).send('Error list ')
         
     }
+}); 
+
+app.post("/DataE/:id",async(req, res) => {
+    try{const data = {
+        Productid:req.body.Productid, 
+        userid:req.session.logindata.userid    
+    }   
+        console.log(data);
+        await axios.post(base_url + '/orders/' + req.params.id ,data);
+        res.redirect("/");   
+    } 
+    catch(err){
+        console.error(err);
+        res.status(500).send('Error orders ')
+        
+    }
+    
 });
 
 
+
+//-------------------------------------------------------
 
 app.get("/login",async(req, res) => {
     const response = await axios.get(base_url + '/users');
@@ -219,6 +247,20 @@ app.post("/addproduct",onlyAdmin,img.single('img_product'),async(req, res) =>{
     }
 });
 
+app.get("/order",onlyAdmin, async(req, res) => {
+
+    try {
+            const response = await axios.get(base_url + "/orders");
+            const response2 = await axios.get(base_url + "/Types");
+            res.render("order", {  order: response.data,
+                                    usedata:req.session.logindata,
+                                    type: response2.data
+                                    });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error orders')
+    }
+})
 
 
 

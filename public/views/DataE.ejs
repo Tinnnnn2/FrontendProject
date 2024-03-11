@@ -1,70 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sneaker Shop</title>
-    <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/"><img src="../img/logo.png" class="logo" alt="Logo"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/nike/<%= type[0].Typeid %>">Nike</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/adidas/<%= type[1].Typeid %>">Adidas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/converse/<%= type[2].Typeid %>">Converse</a>
-                    </li>
-                    <% if(usedata.level == "admin") { %>
+
+    <html lang="en">
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sneaker Shop</title>
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="/"><img src="../img/logo.png" class="logo" alt="Logo"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/addproduct">addproduct</a>
+                            <a class="nav-link" href="/nike/<%= type[0].Typeid %>">Nike</a>
                         </li>
-                        <% } %>
-                </ul>
-                <ul class="navbar-nav me-5">
-                    <li class="nav-item ms-5">
-                        <% if (usedata.username) {%>
-                            <%= usedata.username  %>
-                            <a href="/logout">logout</a>
-                        <% } else {%>
-                        <a class="nav-link" href="/login">Login/Register</a>
-                        <% } %>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-6">
-                <img src="../img/products/<%= product.img_product %>" class="img-fluid" alt="Product Image">
-            </div>
-            <div class="col-md-6">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/adidas/<%= type[1].Typeid %>">Adidas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/converse/<%= type[2].Typeid %>">Converse</a>
+                        </li>
+                        <% if(usedata.level == "admin") { %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/addproduct">addproduct</a>
+                            </li>
+                            <% } %>
+                    </ul>
+                    <ul class="navbar-nav me-5">
+                        <li class="nav-item ms-5">
+                            <% if (usedata.username) {%>
+                                <%= usedata.username  %>
+                                <a href="/logout">logout</a>
+                            <% } else {%>
+                            <a class="nav-link" href="/login">Login/Register</a>
+                            <% } %>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div class="container mt-4">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="product-image-wrapper">
+                  <img src="../img/products/<%= product.img_product %>" class="img-fluid" alt="รูปภาพสินค้า">
+                </div>
+              </div>
+              <div class="col-md-6">
                 <h1 class="display-4"><%= product.Name_product %></h1>
-                <h2 class="h4">Size: <%= product.size %></h2>
-                <h2 class="h4">Price: <%= product.price %></h2>
+                <h2 class="h4">ขนาด: <%= product.size %></h2>
+                <h2 class="h4">ราคา: <%= product.price %> บาท</h2>
+                <p class="lead">
+                  </p>
 
-                <a href="/bucket?Productid=<%= product.Productid %>" class="btn btn-success mt-3">Confirm Purchase</a>
-
+                  <form method="post" action="/DataE/<%= product.Productid %>">
+                    <input type="hidden" name="Productid" value="<%= product.Productid %>">
+                    <input type="hidden" name="userid" value="<%= user.userid %>">
+                    <% if (usedata.username) {%>
+                        <button type="submit" class="btn btn-success btn-lg mt-3">ซื้อเลย</button>
+                        <% } else {%>
+                            <h1>ไปล็อกอิน</h1>
+                        <% }  %>
+                </form>
+                
+              </div>
             </div>
-            </div>
-        </div>
-    </div>
+          </div>
 
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
-</html>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </body>
+    </html>
