@@ -51,6 +51,7 @@ const onlyUser = (req,res,next) => {
     }
 }
 
+//--------------------------------------------------------------
 
 app.get("/",async(req, res) => {
     const response = await axios.get(base_url + "/Products");
@@ -223,6 +224,7 @@ app.post("/Register",async(req, res) => {
     return res.redirect("/");   
 });
 
+//-------------------------------------------------------------
 
 app.get("/addproduct",onlyAdmin,async(req, res) => {
     const response = await axios.get(base_url + "/Products");
@@ -247,20 +249,34 @@ app.post("/addproduct",onlyAdmin,img.single('img_product'),async(req, res) =>{
     }
 });
 
+//-------------------------------------------------------------
+
 app.get("/order",onlyAdmin, async(req, res) => {
 
     try {
             const response = await axios.get(base_url + "/orders");
             const response2 = await axios.get(base_url + "/Types");
+            const response3 = await axios.get(base_url + "/Products");
             res.render("order", {  order: response.data,
                                     usedata:req.session.logindata,
-                                    type: response2.data
+                                    type: response2.data,
+                                    product: response.data
                                     });
     } catch (err) {
         console.error(err);
         res.status(500).send('Error orders')
     }
 })
+
+app.get("/deleteorder/:id", async (req, res) => {
+    try{
+        await axios.delete(base_url + '/orders/'+ req.params.id);
+        res.redirect("/order");
+    } catch (err){
+        console.error(err);
+        res.status(500).send('Error');
+    }
+});
 
 
 
