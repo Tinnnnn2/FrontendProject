@@ -1,5 +1,4 @@
-
-    <html lang="en">
+<html lang="en">
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <meta charset="UTF-8">
@@ -63,16 +62,12 @@
                   <form method="post" action="/DataE/<%= product.Productid %>">
                     <input type="hidden" name="Productid" value="<%= product.Productid %>">
                     <input type="hidden" name="userid" value="<%= user.userid %>">
-                    <% if (usedata.username) {%>
-                        <button type="submit" class="btn btn-success btn-lg mt-3">ซื้อเลย</button>
+                    <% if (usedata.level == "user"){%>
+                        <button type="submit" class="btn btn-success btn-lg mt-3">buy</button>
                         <% } else {%>
-                            <h1>ไปล็อกอิน</h1>
+                            <h1>ไม่ใช่ user โปรด ล็อกอิน หรือ เปลี่ยน แอคเค้าท์ </h1>
                         <% }  %>
                 </form>
-                
-              </div>
-            </div>
-          </div>
 
 
 

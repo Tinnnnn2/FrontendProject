@@ -128,7 +128,7 @@ app.get("/converse/:id",async (req, res) => {
 
 app.get("/DataE/:id",async (req,res) =>{
     const response = await axios.get(base_url + "/Products/" + req.params.id);
-    const response1 = await axios.get(base_url + "/users/" + req.params.id);
+    const response1 = await axios.get(base_url + "/users/");
     const response2 = await axios.get(base_url + "/Types");
     try{
         console.log(req.session.logindata)
@@ -141,11 +141,14 @@ app.get("/DataE/:id",async (req,res) =>{
 }); 
 
 app.post("/DataE/:id",async(req, res) => {
+    const response = await axios.get(base_url + "/Products/" + req.params.id);
+    const response1 = await axios.get(base_url + "/users/" + req.params.id);
+    const response2 = await axios.get(base_url + "/Types");
     try{const data = {
         Productid:req.body.Productid, 
         userid:req.session.logindata.userid    
     }   
-        console.log(data);
+        console.log(data,{product: response.data, user:response1.data,  type: response2.data, usedata:req.session.logindata});
         await axios.post(base_url + '/orders/' + req.params.id ,data);
         res.redirect("/");   
     } 
@@ -278,7 +281,45 @@ app.get("/deleteorder/:id", async (req, res) => {
     }
 });
 
+//---------------------------------------------------------
 
+app.get("/update/:id",onlyAdmin, async (req, res) => {
+    try{
+        const response = await axios.get(base_url + "/Products/" + req.params.id);
+        const response2 = await axios.get(base_url + "/Types");
+        res.render("update", {product: response.data, type: response2.data,usedata:req.session.logindata});
+    } catch (err){
+        console.error(err);
+        res.status(500).send('Error');
+    }
+});
+
+app.post("/update/:id",img.single('img_product'), async (req, res) => {
+    try{
+        const data = {
+            size: req.body.size, 
+            price: req.body.price,
+            Typeid: req.body.Typeid,    
+            Name_product: req.body.Name_product,
+            img_product: req.file.filename
+         };
+        await axios.put(base_url + '/Products/'+ req.params.id,data);
+        res.redirect("/");
+    } catch (err){
+        console.error(err);
+        res.status(500).send('Error');
+    }
+});
+
+app.get("/delete/:id",onlyAdmin,async (req, res) => {
+    try {
+      await axios.delete(base_url + "/Products/" + req.params.id);
+      res.redirect("/");
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Error");
+    }
+  });
 
 app.listen(5500, () => {
     console.log('Sever started on post 5500');
