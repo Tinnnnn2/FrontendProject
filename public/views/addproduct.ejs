@@ -49,35 +49,42 @@
         </div>
     </nav>
 </header>
+
 <div class="container mt-5">
-    <h2 class="text-center">เพิ่มข้อมูลรองเท้า</h2>
-    <form action="/addproduct" method="post" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label for="size" class="form-label">size</label>
-            <input type="text" class="form-control" id="size" name="size" required>
+    <div class="card">
+        <div class="card-header">
+            เพิ่มข้อมูลรองเท้า
         </div>
-        <div class="mb-3">
-            <label for="price" class="form-label">price</label>
-            <input type="text" class="form-control" id="price" name="price" required>
+        <div class="card-body">
+            <form action="/addproduct" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="size" class="form-label">size</label>
+                    <input type="text" class="form-control" id="size" name="size" required>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">price</label>
+                    <input type="text" class="form-control" id="price" name="price" required>
+                </div>
+                <div class="mb-3">
+                    <label for="Typeid" class="form-label">Select Brand:</label>
+                    <select class="form-select" id="Typeid" name="Typeid">
+                        <option value="1">Nike</option>
+                        <option value="2">Adidas</option>
+                        <option value="3">Converse</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="Name_product" class="form-label">Name_product</label>
+                    <input type="text" class="form-control" id="Name_product" name="Name_product" required>
+                </div>
+                <div class="mb-3">
+                    <label for="img_product" class="form-label">ชื่อไฟล์รูป</label>
+                    <input type="file" class="form-control" id="img_product" name="img_product" required>
+                </div>
+                <button type="submit" value="addproduct" class="btn btn-primary">submit</button>
+            </form>
         </div>
-        <div class="mb-3">
-            <label for="Typeid" class="form-label">Select Brand:</label>
-            <select class="form-select" id="Typeid" name="Typeid">
-                <option value="1">Nike</option>
-                <option value="2">Adidas</option>
-                <option value="3">Converse</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="Name_product" class="form-label">Name_product</label>
-            <input type="text" class="form-control" id="Name_product" name="Name_product" required>
-        </div>
-        <div class="mb-3">
-            <label for="img_product" class="form-label">ชื่อไฟล์รูป</label>
-            <input type="file" class="form-control" id="img_product" name="img_product" required>
-        </div>
-        <button type="submit" value="addproduct" class="btn btn-primary">submit</button>
-    </form>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

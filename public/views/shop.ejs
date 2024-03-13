@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sneaker Shop</title>
     <link rel="stylesheet" href="../css/style.css">
+    
 </head>
 <body>
 
@@ -34,17 +35,22 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/order">order</a>
                 </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="/Accouts">accout</a>
+                </li>
                 <% } %>
             </ul>
             <ul class="navbar-nav me-5">
+                <li class="nav-item ms-5">
                     <% if (usedata.username) {%>
                         <%= usedata.username  %>
-                        <a href="/logout"> logout</a>
+                        <a href="/logout">logout</a>
                     <% } else {%>
                     <a class="nav-link" href="/login">Login/Register</a>
                     <% } %>
                 </li>
             </ul>
+            
         </div>
     </nav>
 </header>

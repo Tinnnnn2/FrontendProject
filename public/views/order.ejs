@@ -8,6 +8,30 @@
     <title>Order List</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .card-title {
+            color: #333;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .card-text {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .small-image {
+            max-width: 200px;
+            max-height: 200px;
+            /* margin-left: 300px; */
+        }
+    </style>
 </head>
 <body>
 
@@ -56,11 +80,18 @@
             <% order.forEach(order => { %>
                 <div class="card m-2" >
                     <div class="card-body">
-                        <h5 class="card-title">Order ID: <%= order.orderid %></h5>
-                        <p class="card-text">User ID: <%= order.userid %></p>
-                        <p class="card-text">Product ID: <%= order.Productid %></p>
+                        <h5 class="card-title">Order ID: <%= order.orderid %>  </h5>
+                        <p class="card-text">User ID: <%= order.userid %> </p>
+                        <p class="card-text">User data: <%= user[order.userid - 1].username %>  <%= user[order.userid - 1].userAdress %></p>
+                        <p class="card-text">Phone: <%= user[order.userid - 1].phone %></p>
+                        <p class="card-text">Product ID: <%= order.Productid %> </p>
+                        <p class="card-text">Product Name: <%= product[order.Productid].Name_product %> </p>
+                        <p class="card-text">Product price: <%= product[order.Productid].price %> bath</p>
+                        <div class="product-image-wrapper">
+                            <img src="../img/products/<%= product[order.Productid].img_product %>" class="img-fluid small-image" alt="รูปภาพสินค้า">
+                          </div>
                         <!-- Add more details as needed -->
-                        <a href="/deleteorder/<%= order.orderid %>">Accept</a>
+                        <a href="/deleteorder/<%= order.orderid %>" class="btn btn-success">Accept</a>
                     </div>
                 </div>
             <% }); %>

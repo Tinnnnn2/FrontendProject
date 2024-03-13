@@ -60,6 +60,10 @@
                     <div class="card-body">
                         <h5 class="card-title"><%= ad[i].Name_product %></h5>
                         <a href="/DataE/<%= ad[i].Productid %>" class="btn btn-primary">View Details</a>
+                        <% if(usedata.level == "admin") { %>
+                            <a href="/update/<%= product[i].Productid %>" class="btn btn-warning">update</a>
+                            <a href="/delete/<%= product[i].Productid %>" class="btn btn-danger">delete</a>                       
+                        <% } %>
                     </div>
                 </div>
             </div>

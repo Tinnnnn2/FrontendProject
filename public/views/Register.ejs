@@ -9,7 +9,14 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h2 class="text-center">Register</h2>
+        
+        <% if(usedata.level == "admin") { %>
+            <h2 class="text-center">AddAccout</h2>
+            <% } else {%>
+                <h2 class="text-center">Register</h2>
+                <% } %>
+
+
         <form action="/Register" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>

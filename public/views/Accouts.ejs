@@ -6,6 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sneaker Shop</title>
     <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    
+        .col-md-12 {
+            flex: 0 0 100%; /* Card will take the full width */
+            max-width: calc(100% - 1rem); /* Adjust the width as needed */
+        }
+    
+        .card {
+            width: 100%;
+        }
+    </style>
+    
 </head>
 <body>
 
@@ -28,13 +46,13 @@
                     <a class="nav-link" href="/converse/<%= type[2].Typeid %>">Converse</a>
                 </li>
                 <% if(usedata.level == "admin") { %>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/addproduct">addproduct</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/order">order</a>
-                    </li>
-                    <% } %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/addproduct">addproduct</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/order">order</a>
+                </li>
+                <% } %>
             </ul>
             <ul class="navbar-nav me-5">
                 <li class="nav-item ms-5">
@@ -46,33 +64,32 @@
                     <% } %>
                 </li>
             </ul>
+            
         </div>
     </nav>
 </header>
-
 <div class="container mt-4">
     <h2>Sneaker Collection</h2>
+
     <div class="row">
-        <% for (let i = 0; i < dt.length; i++) { %>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="../img/products/<%= dt[i].img_product %>" class="card-img-top" alt="Product Image">
+        <% for (let i = 0; i < user.length; i++) { %>
+            <div class="col-md-12 mb-4">
+                <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"><%= dt[i].Name_product %></h5>
-                        <a href="/DataE/<%= dt[i].Productid %>" class="btn btn-primary">View Details</a>
-                        <% if(usedata.level == "admin") { %>
-                            <a href="/update/<%= product[i].Productid %>" class="btn btn-warning">update</a>
-                            <a href="/delete/<%= product[i].Productid %>" class="btn btn-danger">delete</a>                       
-                        <% } %>
+                        <h5 class="card-title"><b>username:</b> <%= user[i].username %> </h5>
+                        <h5 class="card-title"><b>email:</b> <%= user[i].email %> </h5>
+                        <h5 class="card-title"><b>Adress:</b><%= user[i].userAdress %> </h5>
+                        <h5 class="card-title"><b>Role:</b> <%= user[i].level %> </h5>
+                        <a href="/Uaccout/<%= user[i].userid %>" class="btn btn-warning">update</a>
+                        <a href="/Accoutdelete/<%= user[i].userid %>" class="btn btn-danger">delete</a> 
                     </div>
                 </div>
             </div>
-        <% } %>
+        <% }; %>
+        <a href="/Register" class="btn btn-success">Add Accout</a> 
     </div>
-</div>
-
-
     
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
