@@ -7,7 +7,7 @@ const multer  = require('multer');
 const { render } = require('ejs');
 const session = require('express-session')
 
-const base_url = "http://node60281-sneakershop.proen.app.ruk-com.cloud:11979";
+const base_url = "http://10.104.18.169:3000";
 
 app.set("views",path.join(__dirname,"/public/views"));
 app.set('view engine','ejs');
