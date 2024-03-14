@@ -7,7 +7,7 @@ const multer  = require('multer');
 const { render } = require('ejs');
 const session = require('express-session')
 
-const base_url = "http://node60262-env-3349855.proen.app.ruk-com.cloud:11979";
+const base_url = "http://localhost:3000";
 
 app.set("views",path.join(__dirname,"/public/views"));
 app.set('view engine','ejs');
@@ -265,6 +265,8 @@ app.get("/order",onlyAdmin, async(req, res) => {
             const response2 = await axios.get(base_url + "/Types");
             const response3 = await axios.get(base_url + "/Products/");
             const response4 = await axios.get(base_url + "/users");
+            console.log(response3)
+            console.log(response4)
             res.render("order", {  order: response.data,
                                     usedata:req.session.logindata,
                                     type: response2.data,
@@ -388,7 +390,7 @@ app.get("/Accoutdelete/:id",onlyAdmin,async (req, res) => {
       res.redirect("/Accouts");
     } catch (err) {
       console.error(err);
-      res.status(500).send("Error");
+      res.status(500).send("Error Accoutdelete");
     }
   });
 
